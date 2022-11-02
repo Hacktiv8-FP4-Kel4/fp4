@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { StyleProvider } from "./styles/style-provider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <StyleProvider>
+      <App />
+    </StyleProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
