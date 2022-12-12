@@ -1,15 +1,21 @@
 import { Movie } from "../../api-hooks/movies.model";
 import { css } from "../../styles/style";
+import placeholderImage from "../../assets/placeholder-image.jpeg";
 
 interface Props {
   movie: Movie;
 }
 export default function Card(props: Props) {
   const { movie } = props;
+  console.log(movie.Poster);
   return (
     <div className={styles.cardContainer()}>
       <div className={styles.columnFlex()}>
-        <img src={movie.Poster} className={styles.imageStyle()} alt="movie" />
+        <img
+          src={movie.Poster !== "N/A" ? movie.Poster : placeholderImage}
+          className={styles.imageStyle()}
+          alt="movie"
+        />
         <div style={{ marginTop: 10 }} className={styles.titleStyle()}>
           {movie.Title}
         </div>
