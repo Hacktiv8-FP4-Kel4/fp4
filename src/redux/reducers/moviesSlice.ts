@@ -10,8 +10,11 @@ export interface MoviesProps {
 function fetchMovies(props: MoviesProps) {
   const apiKey = process.env.REACT_APP_API_KEY;
   const { search = "man", page = 1 } = props;
-
-  return `http://omdbapi.com/?apikey=${apiKey}&s=${search}&page=${page}`;
+  if (!search) {
+    return `http://omdbapi.com/?apikey=${apiKey}&s=man&page=${page}`;
+  } else {
+    return `http://omdbapi.com/?apikey=${apiKey}&s=${search}&page=${page}`;
+  }
 }
 
 export const getMoviesApi = createAsyncThunk(
@@ -19,6 +22,7 @@ export const getMoviesApi = createAsyncThunk(
   async (props: MoviesProps) => {
     try {
       const res = await axios.get(fetchMovies(props));
+
       return res.data;
     } catch (err) {
       return err;
@@ -46,7 +50,7 @@ const moviesSlice = createSlice({
     });
     builder.addCase(getMoviesApi.fulfilled, (state, action) => {
       const data = action.payload as Movies;
-      return { ...state, news: data, loading: false };
+      return { ...state, movies: data, loading: false };
     });
     builder.addCase(getMoviesApi.rejected, (state, action) => {
       return { ...state, loading: false };

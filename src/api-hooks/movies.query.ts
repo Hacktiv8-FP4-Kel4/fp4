@@ -12,7 +12,7 @@ export default function useGetMovies(props: MoviesProps) {
 
   React.useEffect(() => {
     dispatch(getMoviesApi({ search, page }));
-  });
+  }, [dispatch, search, page]);
 
   return { movies, loading };
 }

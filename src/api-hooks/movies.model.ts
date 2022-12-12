@@ -6,4 +6,6 @@ export interface Movies {
     Type: string;
     Poster: string;
   }[];
+  totalResults: number;
+  Response: boolean;
 }
