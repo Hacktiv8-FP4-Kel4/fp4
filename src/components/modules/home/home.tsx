@@ -1,25 +1,61 @@
-import * as React from "react";
-import useGetMovies from "../../../api-hooks/movies.query";
+import { Movies } from "../../../api-hooks/movies.model";
 import { css } from "../../../styles/style";
+import Button from "../../elements/button";
+import CardList from "../../elements/card-list";
 import Container from "../../elements/container";
-import Header from "../../header/header";
+import EmptyView from "../../elements/empty-view";
+import LoadingView from "../../elements/loading-view";
 
-interface Props {}
+interface Props {
+  movies?: Movies;
+  loading: boolean;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
 
 export const HOME_PAGE_ROUTE = "/";
 export default function Home(props: Props) {
-  const [search, setSearch] = React.useState<string>("");
-  const [page, setPage] = React.useState<number>(1);
-  const { loading, movies } = useGetMovies({
-    search: search,
-    page: page,
-  });
+  const { movies, loading, page, setPage } = props;
 
   return (
     <>
-      <Header setSearch={setSearch} />
       <Container>
-        <div className={styles.container()}></div>
+        <div className={styles.container()}>
+          {loading ? (
+            <LoadingView />
+          ) : !movies?.Search ? (
+            <EmptyView />
+          ) : (
+            <div>
+              <CardList movies={movies} />
+              <div
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                }}
+              >
+                {page > 1 && (
+                  <Button
+                    title="Previous"
+                    onSubmit={() => {
+                      setPage(page - 1);
+                    }}
+                    style={{ alignSelf: "center", marginRight: 10 }}
+                  />
+                )}
+                {page * 10 < movies.totalResults && (
+                  <Button
+                    title="Next"
+                    onSubmit={() => {
+                      setPage(page + 1);
+                    }}
+                    style={{ alignSelf: "center" }}
+                  />
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </Container>
     </>
   );

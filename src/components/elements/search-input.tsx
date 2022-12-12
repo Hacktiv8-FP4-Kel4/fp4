@@ -5,12 +5,14 @@ import { useDebouncedCallback } from "use-debounce";
 interface Props {
   placeholder?: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
   type?: string;
 }
 
 export default function SearchInput(props: Props) {
-  const { placeholder = "", setSearch, type = "text" } = props;
+  const { placeholder = "", setSearch, type = "text", setPage } = props;
   const handleChange = useDebouncedCallback((event: any) => {
+    setPage(1);
     setSearch(event.target.value);
   }, 800);
 

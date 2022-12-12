@@ -5,10 +5,11 @@ import SearchInput from "../elements/search-input";
 
 interface Props {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export function Header(props: Props) {
-  const { setSearch } = props;
+  const { setSearch, setPage } = props;
 
   return (
     <div className={styles.navContainer()}>
@@ -16,7 +17,11 @@ export function Header(props: Props) {
         <div className={styles.boldText()}>{"List Movies"}</div>
       </div>
       <div className={styles.flexRow()}>
-        <SearchInput placeholder={"Search..."} setSearch={setSearch} />
+        <SearchInput
+          placeholder={"Search..."}
+          setSearch={setSearch}
+          setPage={setPage}
+        />
       </div>
     </div>
   );
