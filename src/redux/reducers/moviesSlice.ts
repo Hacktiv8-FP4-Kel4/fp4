@@ -11,9 +11,9 @@ function fetchMovies(props: MoviesProps) {
   const apiKey = process.env.REACT_APP_API_KEY;
   const { search = "man", page = 1 } = props;
   if (!search) {
-    return `http://omdbapi.com/?apikey=${apiKey}&s=man&page=${page}`;
+    return `https://omdbapi.com/?apikey=${apiKey}&s=man&page=${page}`;
   } else {
-    return `http://omdbapi.com/?apikey=${apiKey}&s=${search}&page=${page}`;
+    return `https://omdbapi.com/?apikey=${apiKey}&s=${search}&page=${page}`;
   }
 }
 
