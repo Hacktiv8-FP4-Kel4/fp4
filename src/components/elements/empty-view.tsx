@@ -8,7 +8,18 @@ function EmptyComponent() {
   return <Lottie animationData={Empty} loop={true} style={{ width: "80%" }} />;
 }
 
-export default function EmptyView() {
+interface Props {
+  title?: string;
+}
+
+export default function EmptyView(props: Props) {
+  const { title } = props;
+  let errors;
+  if (title === "Too many results.") {
+    errors = "seems the keyword is too common, try another keyword";
+  } else {
+    errors = "seems there is empty, try another keyword";
+  }
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div
@@ -21,9 +32,7 @@ export default function EmptyView() {
         }}
       >
         <EmptyComponent />
-        <Text className={styles.description()}>
-          {`Uh oh, seems there is empty, try another keyword`}
-        </Text>
+        <Text className={styles.description()}>{`Uh oh, ${errors}`}</Text>
       </div>
     </div>
   );

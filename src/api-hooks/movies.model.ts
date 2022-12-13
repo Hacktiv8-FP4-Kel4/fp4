@@ -2,6 +2,7 @@ export interface Movies {
   Search: Movie[];
   totalResults: number;
   Response: boolean;
+  Error?: string;
 }
 
 export interface Movie {

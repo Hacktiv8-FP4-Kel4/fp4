@@ -7,7 +7,7 @@ interface Props {
 }
 export default function Card(props: Props) {
   const { movie } = props;
-  console.log(movie.Poster);
+
   return (
     <div className={styles.cardContainer()}>
       <div className={styles.columnFlex()}>

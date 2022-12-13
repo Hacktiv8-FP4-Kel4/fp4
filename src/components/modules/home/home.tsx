@@ -24,7 +24,7 @@ export default function Home(props: Props) {
           {loading ? (
             <LoadingView />
           ) : !movies?.Search ? (
-            <EmptyView />
+            <EmptyView title={movies?.Error} />
           ) : (
             <div>
               <CardList movies={movies} />
